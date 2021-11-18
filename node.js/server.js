@@ -1,5 +1,5 @@
-d=require('fs');
+fs=require('fs');
 
-function f(g,h){d.exists(g,y=>{if(y){d.readFile(g,(j,k)=>{h.end(k)})}else{d.readFile('public/404.txt',(j,k)=>{h.end(k)})}})}
+function f(path,res){fs.exists(path,callback=>{if(callback){fs.readFile(path,(err,data)=>{res.end(data)})}else{fs.readFile('public/404.txt',(err,data)=>{res.end(data)})}})}
 
-require('http').createServer(function l(m,n){f('public'+(!require('path').basename(m.url)?'/home.txt':m.url),n)}).listen(80);
+require('http').createServer(function t(req,res){f('public'+(!require('path').basename(req.url)?'/home.txt':req.url),res)}).listen(80);
